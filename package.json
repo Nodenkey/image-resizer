@@ -1,0 +1,62 @@
+{
+  "name": "image-resizer",
+  "packageName": "Image Resizer",
+  "version": "1.0.0",
+  "description": "An app to resize images",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1 ",
+    "start": "electron-forge start",
+    "dev": "npx tailwindcss -i tailwind.css -o ./renderer/css/styles.css --watch & npx electronmon .",
+    "make-icons": "electron-icon-maker --input=./expand.png --output=./assets",
+    "make": "electron-forge make",
+    "package": "electron-forge package"
+  },
+  "author": "Nii Odenkey Abbey",
+  "license": "ISC",
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "resize-img": "^2.0.0",
+    "toastify-js": "^1.12.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.67",
+    "@electron-forge/maker-deb": "^6.0.0-beta.67",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.67",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.67",
+    "@electron-forge/maker-zip": "^6.0.0-beta.67",
+    "autoprefixer": "^10.4.12",
+    "electron": "^21.1.1",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.1.8"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "./assets/icons/icon"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "image_resizer"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin" 
+          ]        
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <link rel='stylesheet' href="../css/styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Image Resizer</title>
+    <script src="../js/imageProcesser.js" defer></script>
+</head>
+<body class="container mx-auto bg-gray-900 text-white p-10 flex flex-col items-center justify-center min-h-screen w-full relative">
+    <div id="image-selection-page">
+        <label for="selected-image" class="px-10 cursor-pointer text-center py-6 bg-white shadow rounded-lg text-gray-900 w-fit text-sm font-medium flex flex-col items-center justify-center">
+            <img src="../images/expand.png" alt="expand icon" class="w-8 mb-3">
+            Select an image to resize
+        </label>
+        <input id="selected-image" type="file" accept="image/png, image/jpeg" class="hidden">
+        <p id="selected-image-error" class="text-red-500 text-sm mt-5 absolute -translate-x-1/2 left-1/2 text-center"></p>
+    </div>
+    <div class="w-full hidden" id="size-form">
+        <img src="../images/previous.png" alt="expand icon" class="w-5 cursor-pointer" id="back-icon">
+        <form class="block max-w-[800px] mx-auto mt-5">
+            <img id="size-image" src="" alt="expand icon" class="w-full min-h-[400px] h-[400px] bg-gray-800 border-2 border-white rounded-lg mb-2 object-cover">
+            <p id="filename" class="text-gray-400 text-sm mt-1 mb-1"></p>
+            <p id="original-size" class="text-gray-400 text-sm mt-1 mb-10"></p>
+
+            <div class="rounded-lg bg-gray-700 py-5 px-5 mb-8 text-gray-300 opacity-75">
+                <p id="output-path"></p>
+            </div>
+            <label class="block">
+                Enter new width of your image (px)
+                <input type="number" id="width-input" class="w-full h-12 rounded-lg mt-3 text-gray-900 p-3 outline-gray-800">
+            </label>
+            <label class="mt-10 block">
+                Enter new height of your image (px)
+                <input type="number" id="height-input" class="w-full h-12 rounded-lg mt-3 text-gray-900 p-3 outline-gray-800">
+            </label>
+            <button class="mt-14 block bg-gray-800 hover:bg-gray-700 duration-200 w-full p-4 rounded-lg">Resize image</button>
+        </form>
+    </div>
+</body>
+</html>
