@@ -19,13 +19,18 @@
       "buildResources": "./assets/icons"
      },
      "mac": {
+      "publish": ["github"],
       "target": "dmg"
      },
-     "win" : {
+     "win": {
+      "publish": ["github"],
       "certificateFile": "./private/desktopApps.p12",
       "verifyUpdateCodeSignature": false,
       "publisherName": "nodenkey"
-     }
+     },
+     "linux": {
+      "publish": ["github"]
+     } 
   },
   "author": "Nii Odenkey Abbey",
   "license": "ISC",
