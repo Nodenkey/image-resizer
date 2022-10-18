@@ -1,4 +1,4 @@
-const {app, BrowserWindow, Menu, ipcMain, shell} = require('electron');
+const {app, BrowserWindow, Menu, ipcMain, shell, autoUpdater} = require('electron');
 const path = require('path');
 const os = require('os');
 const resizeImg = require('resize-img');
@@ -6,11 +6,42 @@ const fs = require('fs');
 
 // use npx electronmon . to start process (in script as dev)
 
-// change to production or remove before bundling;
-// process.env.NODE_ENV = 'development'
-
 const isMAC = process.platform === 'darwin';
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = !app.isPackaged;
+
+// updating app
+const server = 'https://hazel-delta-steel.vercel.app';
+const url = `${server}/update/${process.platform}/${app.getVersion()}`;
+autoUpdater.setFeedURL({ url })
+
+// check for update every minute
+if (!isDev) {
+    setInterval(() => {
+        autoUpdater.checkForUpdates()
+    }, 60000)
+}
+
+
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+    const dialogOpts = {
+      type: 'info',
+      buttons: ['Restart', 'Later'],
+      title: 'Application Update',
+      message: process.platform === 'win32' ? releaseNotes : releaseName,
+      detail:
+        'A new version has been downloaded. Restart the application to apply the updates.',
+    }
+  
+    dialog.showMessageBox(dialogOpts).then((returnValue) => {
+      if (returnValue.response === 0) autoUpdater.quitAndInstall()
+    })
+  })
+
+  autoUpdater.on('error', (message) => {
+    console.error('There was a problem updating the application')
+    console.error(message)
+  })
+
 
 
 // initialise mainWindow so it is available globally
